@@ -7,7 +7,8 @@ module Mutations
     def resolve(name: nil, artist_id: nil)
       Album.create!(
         name: name,
-        artist: Artist.find(artist_id)
+        artist: Artist.find(artist_id),
+        user: context[:current_user]
       )
     end
   end
