@@ -1,11 +1,14 @@
 module Mutations
   class CreateAlbum < BaseMutation
     argument :name, String, required: true
+    argument :artist_id, ID, required: true
     type Types::AlbumType
 
-    def resolve(name: nil)
+    def resolve(name: nil, artist_id: nil)
       Album.create!(
-        name: name
+        name: name,
+        artist: Artist.find(artist_id),
+        user: context[:current_user]
       )
     end
   end
